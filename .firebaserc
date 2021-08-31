@@ -1,0 +1,18 @@
+{
+  "targets": {
+    "prueba-app-dbd25": {
+      "hosting": {
+        "sala-de-juegos": [
+          "prueba-app-dbd25"
+        ]
+      }
+    },
+    "sala-de-juegos-e5892": {
+      "hosting": {
+        "sala-de-juegos": [
+          "sala-de-juegos-e5892"
+        ]
+      }
+    }
+  }
+}
