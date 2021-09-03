@@ -9,13 +9,13 @@ import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { QuienSoyComponent } from './components/quien-soy/quien-soy.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { ErrorComponent } from './pages/error/error.component';
-import { RegisterComponent } from './components/register/register.component';
+import { ErrorComponent } from './components/error/error.component';
 import { AlertComponent } from './components/alert/alert.component';
 
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -25,7 +25,6 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/comp
     QuienSoyComponent,
     NavbarComponent,
     ErrorComponent,
-    RegisterComponent,
     AlertComponent,
   ],
   imports: [
@@ -33,7 +32,9 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/comp
     AppRoutingModule,
     FormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    MatSnackBarModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

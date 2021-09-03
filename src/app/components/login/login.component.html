@@ -2,9 +2,15 @@
     <div class="container">
       <div class="col-left">
         <div class="login-text">
-          <h2>Bienvenido</h2>
-          <p>Crea tu cuenta</p>
-          <a class="btn" [routerLink]="['/register']">Registrarse</a>
+          <div *ngIf='this.log'>
+            <h2>Bienvenido</h2>
+            <p>Crea tu cuenta</p>
+            <a class="btn" (click)='this.log = false'>Registrarse</a>
+          </div>
+          <div *ngIf='!this.log'>
+            <p>Ya tenes una cuenta?<br> Inicia sesion</p>
+            <a class="btn" (click)='this.log = true'>Iniciar sesion</a>
+          </div>
         </div>
       </div>
       <div class="col-right">
@@ -20,8 +26,9 @@
               <input type="password" name='password' [(ngModel)]="password" placeholder="contraseña" value={{this.password}} required>
             </p>
             <p>
-              <input type="button" class="btn btn-primary"value="Iniciar sesión" (click)='this.login()'/>
-              <input type="button" class="btn btn-primary" value="Iniciar sesión rapido" (click)='this.loginRapido()'/>
+              <input type="button" class="btn btn-primary" *ngIf='this.log' value="Iniciar sesión" (click)='this.login()'/>
+              <input type="button" class="btn btn-primary" *ngIf='!this.log' value="Registrarse" (click)='this.register()'/>
+              <input type="button" class="btn btn-primary" *ngIf='this.log' value="Iniciar sesión rapido" (click)='this.loginRapido()'/>
             </p>
             <app-alert *ngIf='this.alert' mensaje={{this.mensaje}} color="alert-warning"></app-alert>
             <p>

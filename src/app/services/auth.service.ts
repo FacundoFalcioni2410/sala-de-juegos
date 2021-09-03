@@ -13,56 +13,18 @@ export class AuthService {
 
   constructor(private auth: AngularFireAuth, private router: Router, private firestore: FirestoreService) {
     this.auth.authState.subscribe((user) => {
+      console.log(user)
       this.isLoggedIn = user;
-      if(user)
-      {
-        this.router.navigate(['home']);
-      }
-      else
-      {
-        this.router.navigate(['login']);
-      }
     });
   }
 
 
   login(email: any, password: any) {
-    this.auth.signInWithEmailAndPassword(email, password)
-    .then((res: any) => {
-      let user: User = {email: res.user.email, uid: res.user.uid, loginDate: Date.now()};
-      console.log(user);
-      this.firestore.addItem(user);
-      this.router.navigate(['/home']);
-    })
-    .catch( (err) => {
-      console.log(err)
-      // if(err.code === 'auth/invalid-email' || err.code === 'user-not-found' || err.code === 'auth/wrong-password')
-      // {
-        
-      // }
-    });
+    return this.auth.signInWithEmailAndPassword(email, password)
   }
 
   register(email: any, password: any){
-      this.auth.createUserWithEmailAndPassword(email, password)
-      .then( () => {
-        this.router.navigate(['home']);
-      })
-      .catch( (err) => {
-        console.log(err.code);
-        // if(err.code === 'auth/invalid-email')
-        // {
-          
-        // }
-        // else if(err.code === 'auth/weak-password')
-        // {
-          
-        // }
-        // else if(err.code === 'auth/email-already-in-use')
-        // {
-          
-        // }
-      });
+      return this.auth.createUserWithEmailAndPassword(email, password)
     }
 
     logOut(){

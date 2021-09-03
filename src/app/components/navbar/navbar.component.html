@@ -18,7 +18,7 @@
             <a class="nav-link" [routerLink]="['about']">About me</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" *ngIf='this.auth.isLoggedIn' (click)='this.auth.logOut()'>Log out</a>
+            <a class="nav-link" *ngIf='this.auth.isLoggedIn' (click)='this.auth.logOut()' [routerLink]="['login']">Log out</a>
           </li>
         </ul>
       </div>
