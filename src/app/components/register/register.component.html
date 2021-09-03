@@ -3,8 +3,8 @@
       <div class="col-left">
         <div class="login-text">
           <h2>Bienvenido</h2>
-          <p>Crea tu cuenta</p>
-          <a class="btn" [routerLink]="['/register']">Registrarse</a>
+          <p>Ya tenes una cuenta?<br> Inicia sesion</p>
+          <a class="btn" [routerLink]="['/login']">Iniciar sesion</a>
         </div>
       </div>
       <div class="col-right">
@@ -20,10 +20,8 @@
               <input type="password" name='password' [(ngModel)]="password" placeholder="contraseña" value={{this.password}} required>
             </p>
             <p>
-              <input type="button" class="btn btn-primary"value="Iniciar sesión" (click)='this.login()'/>
-              <input type="button" class="btn btn-primary" value="Iniciar sesión rapido" (click)='this.loginRapido()'/>
+              <input type="button" class="btn btn-primary"value="Registrarse" (click)='this.register()'/>
             </p>
-            <app-alert *ngIf='this.alert' mensaje={{this.mensaje}} color="alert-warning"></app-alert>
             <p>
               <a href="">Forget Password?</a>
             </p>
