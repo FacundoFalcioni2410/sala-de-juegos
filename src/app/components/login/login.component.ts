@@ -35,10 +35,7 @@ export class LoginComponent implements OnInit {
     this.password = 'invitado';
   }
 
-  login(){
-    let snackBarRef = this.snackBar.open('Mensaje');
-
-    this.snackBar.open('error');
+  login(){    
     if(this.email !== '' && this.password !== '')
     {
       this.auth.login(this.email, this.password)
@@ -48,8 +45,11 @@ export class LoginComponent implements OnInit {
         this.firestore.addItem(user);
       })
       .catch( (err) => {
-        this.mensaje = err.code;
-        this.alert = true;
+        if(err.code === 'auth/invalid-email' || err.code === 'user-not-found' || err.code === 'auth/wrong-password')
+        {
+          let snackBarRef = this.snackBar.open('The e-mail or password are invalid');
+          setTimeout(() => snackBarRef.dismiss(), 2000);
+        }
       });
     }
   }
@@ -64,9 +64,23 @@ export class LoginComponent implements OnInit {
           this.firestore.addItem(user);
         })
       .catch( (err) => {
-        console.log(err.code);
-        this.mensaje = err.code;
-        this.alert = true;
+        if(err.code === 'auth/invalid-email')
+        {
+          let snackBarRef = this.snackBar.open('Invalid e-mail');
+          setTimeout(() => snackBarRef.dismiss(), 2000);
+        }
+        else if(err.code === 'auth/weak-password')
+        {
+          let snackBarRef = this.snackBar.open('The password must have, at least, 6 characters');
+          setTimeout(() => snackBarRef.dismiss(), 2000);
+        }
+        else if(err.code === 'auth/email-already-in-use')
+        {
+          let snackBarRef = this.snackBar.open('E-mail is currently being used');
+          setTimeout(() => snackBarRef.dismiss(), 2000);
+        }
+
+        
       });
     }
   }
