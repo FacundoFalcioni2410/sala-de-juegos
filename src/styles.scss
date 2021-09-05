@@ -1,3 +1,8 @@
+@font-face{
+    font-family: 'Sirin Stencil', cursive;
+    src: local('Sirin Stencil'), url(./fonts/SirinStencil-Regular.ttf) format("truetype");
+}
+
 .fullscreen-bg {
     position: fixed;
     z-index: -1;
@@ -6,5 +11,5 @@
     background-image:url(./assets/fondo.png);
 }
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: SirinStencil}
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";

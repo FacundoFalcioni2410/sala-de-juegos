@@ -30,10 +30,7 @@
               <input type="button" class="btn btn-primary" *ngIf='!this.log' value="Registrarse" (click)='this.register()'/>
               <input type="button" class="btn btn-primary" *ngIf='this.log' value="Iniciar sesión rapido" (click)='this.loginRapido()'/>
             </p>
-            <app-alert *ngIf='this.alert' mensaje={{this.mensaje}} color="alert-warning"></app-alert>
-            <p>
-              <a href="">Forget Password?</a>
-            </p>
+              <div class="text-danger">{{alertError}}</div>
           </form>
         </div>
       </div>

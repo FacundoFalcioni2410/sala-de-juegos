@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   password: string;
   mensaje: string;
   alert = false;
+  alertError = '';
   snackBar: MatSnackBar;
 
   constructor(public auth: AuthService, private router: Router, public firestore: FirestoreService, private snackbar: MatSnackBar) {
@@ -40,15 +41,22 @@ export class LoginComponent implements OnInit {
     {
       this.auth.login(this.email, this.password)
       .then((res: any) => {
+        console.log(res);
         let user: User = {email: res.user.email, uid: res.user.uid, loginDate: Date.now()};
         console.log(user);
         this.firestore.addItem(user);
       })
       .catch( (err) => {
-        if(err.code === 'auth/invalid-email' || err.code === 'user-not-found' || err.code === 'auth/wrong-password')
+        if(err.code === 'auth/invalid-email' || err.code === 'auth/user-not-found' || err.code === 'auth/wrong-password')
         {
-          let snackBarRef = this.snackBar.open('The e-mail or password are invalid');
-          setTimeout(() => snackBarRef.dismiss(), 2000);
+          this.alertError = 'La contraseña o el mail son invalidos';
+          // var snackBarRef = this.snackBar.open('The e-mail or password are invalid' ,'OK!');
+          // setTimeout(()=>{
+          //   snackBarRef.dismiss();  
+          // })
+          // snackBarRef.afterDismissed().subscribe(() => {  
+          //   console.log('The snack-bar was dismissed');  
+          // });  
         }
       });
     }
@@ -66,21 +74,16 @@ export class LoginComponent implements OnInit {
       .catch( (err) => {
         if(err.code === 'auth/invalid-email')
         {
-          let snackBarRef = this.snackBar.open('Invalid e-mail');
-          setTimeout(() => snackBarRef.dismiss(), 2000);
+          this.alertError = 'Formato de mail invalido';
         }
         else if(err.code === 'auth/weak-password')
         {
-          let snackBarRef = this.snackBar.open('The password must have, at least, 6 characters');
-          setTimeout(() => snackBarRef.dismiss(), 2000);
+          this.alertError = 'La contraseña debe tener 6 o más caracteres';
         }
         else if(err.code === 'auth/email-already-in-use')
         {
-          let snackBarRef = this.snackBar.open('E-mail is currently being used');
-          setTimeout(() => snackBarRef.dismiss(), 2000);
+          this.alertError = 'Ya hay un usuario registrado con ese mail';
         }
-
-        
       });
     }
   }

@@ -13,7 +13,6 @@ export class AuthService {
 
   constructor(private auth: AngularFireAuth, private router: Router, private firestore: FirestoreService) {
     this.auth.authState.subscribe((user) => {
-      console.log(user)
       this.isLoggedIn = user;
     });
   }
