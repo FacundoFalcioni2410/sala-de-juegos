@@ -1,0 +1,11 @@
+<div style='background-color:#fff'>
+    <input type="text" [(ngModel)]="mensajeE"/>
+    <button type="button" (click)="this.sendMessage()"></button>
+    
+    <ul>
+        <li *ngFor="let item of item$ | async">
+            <p>Mensaje: {{item.mensaje}}</p>
+            <p>Usuario: {{item.usuario}}</p>
+        </li>
+    </ul>
+</div>
