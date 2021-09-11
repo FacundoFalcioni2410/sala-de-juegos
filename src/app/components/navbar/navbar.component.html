@@ -21,11 +21,10 @@
             <a class="nav-link" *ngIf='this.auth.isLoggedIn' (click)='this.auth.logOut()' [routerLink]="['login']">Log out</a>
           </li>
         </ul>
-      </div>
-
-      <div class="nav-item active text-light" style="margin-right: 50px;">
-        <a class="nav-item active" *ngIf="this.auth.isLoggedIn.email">Bienvenido, {{this.auth.isLoggedIn.email}}</a>
-        <a class="nav-item active" *ngIf="!this.auth.isLoggedIn"></a>
+        <div class="nav-item active text-light" style="margin-right: 50px;">
+          <a class="nav-item active" *ngIf="this.auth.isLoggedIn.email">Bienvenido, {{this.auth.isLoggedIn.email}}</a>
+          <a class="nav-item active" *ngIf="!this.auth.isLoggedIn"></a>
+        </div>
       </div>
     </div>
 </nav>

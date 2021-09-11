@@ -1,24 +1,22 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, AngularFireList } from '@angular/fire/compat/database';
-import { Mensaje } from '../classes/mensaje';
+import { AngularFireDatabase } from '@angular/fire/compat/database';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChatService {
 
-  collectionRoute: string = '/chat'
-  refCollection: AngularFireList<Mensaje>;
+  items: Observable<any[]>;
+  chatDb = '/chat';
 
-  constructor(private bd: AngularFireDatabase) {
-    this.refCollection = bd.list(this.collectionRoute);
+  constructor(private fireDB: AngularFireDatabase) {
+    this.items = fireDB.list(this.chatDb).valueChanges();
   }
 
-  pushMessage(mensaje: any){
-    return this.refCollection.push(mensaje);
+  sendMessage(message :any){
+    const itemsRef = this.fireDB.list(this.chatDb);
+    itemsRef.push(message);
   }
 
-  getMessages(): AngularFireList<Mensaje>{
-    return this.refCollection;
-  }
 }

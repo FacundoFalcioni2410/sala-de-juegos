@@ -1,6 +1,6 @@
+import { Message } from './../../classes/Message';
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Mensaje } from 'src/app/classes/mensaje';
+import { AuthService } from 'src/app/services/auth.service';
 import { ChatService } from 'src/app/services/chat.service';
 
 @Component({
@@ -10,26 +10,51 @@ import { ChatService } from 'src/app/services/chat.service';
 })
 export class ChatComponent implements OnInit {
 
-  mensaje: Mensaje = {
-    mensaje: '',
-    usuario: 'test'
-  };
+  messages:any;
+  message: Message;
 
-  mensajeE: string = '';
-  item$: Observable<any[]>;
+  constructor(private chatS: ChatService, public auth: AuthService) { 
+    this.messages = chatS.items;
+    this.message = {
+      user: '',
+      message: '',
+      date: Date().toString(),
+    }
+  }
 
-  constructor(private chatService: ChatService) {
-    this.item$ = chatService.getMessages().valueChanges();
+  sendMessage(){
+    let d: Date = new Date();
+    this.message.user = this.auth.isLoggedIn.email
+    this.message.date = d.getHours() + ':' + d.getMinutes(),
+    console.log(this.message);
+    this.chatS.sendMessage(this.message);
+    this.message.message = '';
   }
 
   ngOnInit(): void {
   }
 
-  sendMessage(){
-    this.mensaje.mensaje = this.mensajeE;
-    console.log(this.mensaje);
-    this.chatService.pushMessage(this.mensaje);
-    this.mensajeE = '';
-  }
-
 }
+//   messageInput: string = '';
+
+//   constructor(private chatService: ChatService, public auth: AuthService) {
+  //   }
+  
+  //   ngOnInit(): void {
+    //   }
+    
+     
+
+//   sendMessage(){
+//     let d: Date = new Date();
+//     let auxMessage: Message = {
+//       message: this.messageInput,
+//       user: this.auth.isLoggedIn.email,
+//       date: d.getHours() + ':' + d.getMinutes(),
+//     }
+//     console.log(this.messageInput);
+//     this.chatService.sendMessage(auxMessage);
+//     this.messageInput = '';
+//   }
+
+// }

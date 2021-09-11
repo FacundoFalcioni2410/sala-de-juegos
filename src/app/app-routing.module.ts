@@ -16,8 +16,9 @@ const routes: Routes = [
     path: 'chat',
     component: ChatComponent,
   },
-  {path: '**', redirectTo: 'error'},
+  {path: 'saladejuegos', loadChildren: () => import('./sala-de-juegos/sala-de-juegos.module').then(m => m.SalaDeJuegosModule) },
   {path: 'error', component: ErrorComponent},
+  {path: '**', redirectTo: 'error'},
 ];
 
 @NgModule({

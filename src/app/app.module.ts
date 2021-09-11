@@ -14,9 +14,12 @@ import { AlertComponent } from './components/alert/alert.component';
 
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ChatComponent } from './components/chat/chat.component';
+import { HangmanComponent } from './games/hangman/hangman.component';
+import { KeyboardComponent } from './games/keyboard/keyboard.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +31,8 @@ import { ChatComponent } from './components/chat/chat.component';
     ErrorComponent,
     AlertComponent,
     ChatComponent,
+    HangmanComponent,
+    KeyboardComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,6 +41,11 @@ import { ChatComponent } from './components/chat/chat.component';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     MatSnackBarModule,
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-bottom-center',
+      preventDuplicates: true,
+    }),
     BrowserAnimationsModule,
   ],
   providers: [],

@@ -1,0 +1,23 @@
+<div class='bg-dark'>
+    <h1> JUEGO DEL AHORCADO </h1>
+    <div class="row justify-content-center m-0">
+        <div class="col-6 text-center">
+            <div *ngFor='let espacio of this.espacios' class='espacios d-inline'>
+                {{espacio}}
+            </div>
+            <div class="row justify-content-center mt-3">
+                <div class='col-2' *ngFor='let letra of this.letras'>
+                    <input type="button" value={{letra}} id="boton" (click)="this.cambiarEspacio(letra)"/>
+                </div>
+                <button (click)='this.randomWord()' *ngIf='this.palabraSeleccionada === ""'>Generar palabra</button>
+                <button (click)='this.reiniciar()' *ngIf='this.palabraSeleccionada !== ""'>Reiniciar</button>
+            </div>
+            <div class="row justify-content-center mt-3">
+                <div class="col-6 text-center">
+                    <img src={{this.imagen}} height="300" width="300"/>
+                </div>
+            </div>
+                   
+        </div>
+    </div>
+    <br>
