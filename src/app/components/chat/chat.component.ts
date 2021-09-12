@@ -33,8 +33,8 @@ export class ChatComponent implements OnInit {
     if(this.message.message.length <= 80){
       this.message.user = this.auth.isLoggedIn.email
       this.message.date = this.getTime();
-      console.log(this.message);
-      // this.chatS.sendMessage(this.message);
+      // console.log(this.message);
+      this.chatS.sendMessage(this.message);
       this.message.message = '';
       this.scrollToBottom();
     }
