@@ -19,7 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ChatComponent } from './components/chat/chat.component';
 import { HangmanComponent } from './games/hangman/hangman.component';
-import { KeyboardComponent } from './games/keyboard/keyboard.component';
+import { MayorMenorComponent } from './games/mayor-menor/mayor-menor.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +32,7 @@ import { KeyboardComponent } from './games/keyboard/keyboard.component';
     AlertComponent,
     ChatComponent,
     HangmanComponent,
-    KeyboardComponent,
+    MayorMenorComponent,
   ],
   imports: [
     BrowserModule,

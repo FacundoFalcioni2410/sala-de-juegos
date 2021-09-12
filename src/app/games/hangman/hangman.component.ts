@@ -42,17 +42,14 @@ export class HangmanComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  letraSeleccionada(letra:string){
-    return letra;
-  }
-  
-  // cantidadCaracteres(){
-  //   return this.palabraSeleccionada.split('');
-  // }
-
   asignarCantidad(){
-    this.espacios = Array(this.palabraSeleccionada.length).fill('_');
-    console.log(this.espacios);
+    try{
+      this.espacios = Array(this.palabraSeleccionada.length).fill('_');
+    }
+    catch(err)
+    {
+      console.dir(err);
+    }
   }
 
 
@@ -77,8 +74,9 @@ export class HangmanComponent implements OnInit {
   randomWord(){
     this.isRunning = true;
     this.palabraSeleccionada = this.palabras[Math.round(Math.random()*(this.palabras.length - 0))];
-    this.asignarCantidad();
-  }
+
+      this.asignarCantidad();
+    }
 
   mostrarToast(mensaje: string, titulo?: string) {
     this.toastr.error(mensaje, titulo);

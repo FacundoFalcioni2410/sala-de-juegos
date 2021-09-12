@@ -1,8 +1,7 @@
 @font-face{
-    font-family: 'Sirin Stencil', cursive;
-    src: local('Sirin Stencil'), url(./fonts/SirinStencil-Regular.ttf) format("truetype");
+    font-family: "Antreas";
+    src:local("Antreas"),url('./fonts/Antreas.ttf')format("truetype");
 }
-
 .fullscreen-bg {
     position: fixed;
     z-index: -1;
@@ -10,7 +9,8 @@
     background-size: cover;
     background-image:url(./assets/fondo.png);
 }
+
 html, body { height: 100%; }
-body { margin: 0; font-family: SirinStencil}
+// body { margin: 0; font-family: SirinStencil}
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import '~ngx-toastr/toastr';

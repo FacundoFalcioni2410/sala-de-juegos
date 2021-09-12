@@ -1,5 +1,6 @@
+import { ToastrService } from 'ngx-toastr';
 import { Message } from './../../classes/Message';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { ChatService } from 'src/app/services/chat.service';
 
@@ -10,10 +11,12 @@ import { ChatService } from 'src/app/services/chat.service';
 })
 export class ChatComponent implements OnInit {
 
+  @ViewChild('scrollMe') private myScrollContainer!: ElementRef;
   messages:any;
   message: Message;
+  scrollContainer: any;
 
-  constructor(private chatS: ChatService, public auth: AuthService) { 
+  constructor(private chatS: ChatService, public auth: AuthService, private toastr: ToastrService) { 
     this.messages = chatS.items;
     this.message = {
       user: '',
@@ -22,17 +25,57 @@ export class ChatComponent implements OnInit {
     }
   }
 
+  mostrarToast(mensaje: string, titulo?: string) {
+    this.toastr.error(mensaje, titulo);
+  }
+
   sendMessage(){
-    let d: Date = new Date();
-    this.message.user = this.auth.isLoggedIn.email
-    this.message.date = d.getHours() + ':' + d.getMinutes(),
-    console.log(this.message);
-    this.chatS.sendMessage(this.message);
-    this.message.message = '';
+    if(this.message.message.length <= 80){
+      this.message.user = this.auth.isLoggedIn.email
+      this.message.date = this.getTime();
+      console.log(this.message);
+      // this.chatS.sendMessage(this.message);
+      this.message.message = '';
+      this.scrollToBottom();
+    }
+    else
+    {
+      this.mostrarToast('Los mensajes no pueden ser mas largos de 80 caracteres', 'Error!');
+    }
+  }
+
+  getTime(){
+    let d = new Date();
+    let hour: any = d.getHours();
+    let minute: any = d.getMinutes();
+
+    if(d.getHours() < 10)
+    {
+      hour = '0' + d.getHours();   
+    }
+
+    if(d.getMinutes() < 10)
+    {
+      minute = '0' + d.getMinutes();
+    }
+
+    return `${hour}:${minute}`
   }
 
   ngOnInit(): void {
   }
+
+  ngAfterViewChecked() {        
+    this.scrollToBottom();        
+  }  
+
+  scrollToBottom(): void {
+    try {
+        this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+    } catch(err) {
+      console.dir(err);
+    }                 
+}
 
 }
 //   messageInput: string = '';

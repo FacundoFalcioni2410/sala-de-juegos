@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { KeyboardComponent } from './keyboard.component';
+import { MayorMenorComponent } from './mayor-menor.component';
 
-describe('KeyboardComponent', () => {
-  let component: KeyboardComponent;
-  let fixture: ComponentFixture<KeyboardComponent>;
+describe('MayorMenorComponent', () => {
+  let component: MayorMenorComponent;
+  let fixture: ComponentFixture<MayorMenorComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ KeyboardComponent ]
+      declarations: [ MayorMenorComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(KeyboardComponent);
+    fixture = TestBed.createComponent(MayorMenorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

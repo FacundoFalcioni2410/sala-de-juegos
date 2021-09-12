@@ -1,5 +1,6 @@
 .container{
-    padding-top: 100px;
+    padding: 0;
+    margin:0;
     width: 500px;
   }
   .col-md-2, .col-md-10{
@@ -33,12 +34,16 @@
     overflow: hidden;
   }
   .msg_receive{
+      background-color: #8e39ad !important;
+      color:#fff;
       padding-left:0;
       margin-left:0;
   }
   .msg_sent{
-      padding-bottom:20px !important;
-      margin-right:0;
+    background-color: #3833cc !important;
+    color:#fff;
+    padding-bottom:20px !important;
+    margin-right:0;
   }
   .messages {
     background: white;
@@ -124,4 +129,8 @@
       position:fixed;
       left:0px;
       bottom:0;
+  }
+
+  #mensajes{
+      padding:0;
   }

@@ -1,57 +1,44 @@
 <div class="container">
-    <div class="row chat-window col-md-12" id="chat_window_1" style="margin-left:10px;">
-        <div class="col-xs-12 col-md-12">
+    <div class="row chat-window col-md-12 justify-content-center" id="chat_window_1" #scrollFrame>
+        <div class="col-xs-12 col-md-12" id='mensajes'>
         	<div class="panel panel-default">
                 <div class="panel-heading top-bar">
                     <div class="col-md-8 col-xs-8">
                         <h3 class="panel-title"><span class="glyphicon glyphicon-comment"></span> Chat</h3>
                     </div>
-                    <div class="col-md-4 col-xs-4" style="text-align: right;">
+                </div>
+                <div class="panel-body msg_container_base" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+                    <div *ngFor="let item of messages | async">
+                        <div class="row msg_container base_sent bg-dark" *ngIf='this.auth.isLoggedIn.email === item.user'>
+                            <div class="col-md-10 col-xs-10">
+                                <div class="messages msg_sent">
+                                    <h6>{{item.user}}</h6>
+                                    <p>{{item.message}}</p>
+                                    <time>{{item.date}}</time>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row msg_container base_receive bg-dark" *ngIf='this.auth.isLoggedIn.email !== item.user'>
+                            <div class="col-md-10 col-xs-10">
+                                <div class="messages msg_receive">
+                                    <h6>{{item.user}}</h6>
+                                    <p>{{item.message}}</p>
+                                    <time>{{item.date}}</time>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="panel-body msg_container_base">
-
-                <div *ngFor="let item of messages | async">
-                    <div class="row msg_container base_sent" *ngIf='this.auth.isLoggedIn.email === item.user'>
-                        <div class="col-md-10 col-xs-10">
-                            <div class="messages msg_sent">
-                                <h6>{{item.user}}</h6>
-                                <p>{{item.message}}</p>
-                                <time>{{item.date}}</time>
-                            </div>
-                        </div>
-                        <div class="col-md-2 col-xs-2">
-                            <!-- {{item.user}} -->
-                        </div>
-                    </div>
-                    <div class="row msg_container base_receive" *ngIf='this.auth.isLoggedIn.email !== item.user'>
-                        <div class="col-md-2 col-xs-2">
-                            <!-- {{item.user}} -->
-                        </div>
-                        <div class="col-md-10 col-xs-10">
-                            <div class="messages msg_receive">
-                                <h6>{{item.user}}</h6>
-                                <p>{{item.message}}</p>
-                                <time>{{item.date}}</time>
-                            </div>
-                        </div>
-                    </div>
+            </div>
+            <div class="panel-footer">
+                <div class="input-group">
+                    <input id="btn-input" type="text" class="form-control input-sm chat_input"  [(ngModel)]="this.message.message" placeholder="Ingrese su mensaje" />
+                    <span class="input-group-btn">
+                    <button class="btn btn-primary btn-sm" id="btn-chat" (click)='this.sendMessage()'>Enviar</button>
+                    </span>
+                </div>
             </div>
         </div>
-
     </div>
-    <div class="panel-footer">
-        <div class="input-group">
-            <input id="btn-input" type="text" class="form-control input-sm chat_input"  [(ngModel)]="this.message.message" placeholder="Ingrese su mensaje" />
-            <span class="input-group-btn">
-            <button class="btn btn-primary btn-sm" id="btn-chat" (click)='this.sendMessage()'>Enviar</button>
-            </span>
-        </div>
-    </div>
-
-    <!-- <div class="card chat-write-box" align="center">
-        <label class="example-full-width " >
-            <input class="msgText" [(ngModel)]="this.message.message" type="email" autocomplete="off">
-            <button >Enviar</button>
-        </label>
-    </div> -->
+</div>
