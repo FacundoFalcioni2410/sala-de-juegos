@@ -10,7 +10,6 @@ import { HomeComponent } from './components/home/home.component';
 import { QuienSoyComponent } from './components/quien-soy/quien-soy.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ErrorComponent } from './components/error/error.component';
-import { AlertComponent } from './components/alert/alert.component';
 
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
@@ -29,7 +28,6 @@ import { MayorMenorComponent } from './games/mayor-menor/mayor-menor.component';
     QuienSoyComponent,
     NavbarComponent,
     ErrorComponent,
-    AlertComponent,
     ChatComponent,
     HangmanComponent,
     MayorMenorComponent,
