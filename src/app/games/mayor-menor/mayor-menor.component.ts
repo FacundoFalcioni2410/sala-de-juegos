@@ -86,8 +86,6 @@ export class MayorMenorComponent implements OnInit {
   MayorMenor(mayor: boolean)
   {
     let aux = this.proximaCarta();
-    console.log('carta actual: ',this.number);
-    console.log('proximo numero: ', this.numberNext);
     
     this.card = aux;
 
