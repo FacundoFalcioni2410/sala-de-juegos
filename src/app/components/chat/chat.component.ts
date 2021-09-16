@@ -33,7 +33,6 @@ export class ChatComponent implements OnInit {
     if(this.message.message.length <= 80){
       this.message.user = this.auth.isLoggedIn.email
       this.message.date = this.getTime();
-      // console.log(this.message);
       this.chatS.sendMessage(this.message);
       this.message.message = '';
       this.scrollToBottom();
@@ -75,29 +74,5 @@ export class ChatComponent implements OnInit {
     } catch(err) {
       console.dir(err);
     }                 
+  }
 }
-
-}
-//   messageInput: string = '';
-
-//   constructor(private chatService: ChatService, public auth: AuthService) {
-  //   }
-  
-  //   ngOnInit(): void {
-    //   }
-    
-     
-
-//   sendMessage(){
-//     let d: Date = new Date();
-//     let auxMessage: Message = {
-//       message: this.messageInput,
-//       user: this.auth.isLoggedIn.email,
-//       date: d.getHours() + ':' + d.getMinutes(),
-//     }
-//     console.log(this.messageInput);
-//     this.chatService.sendMessage(auxMessage);
-//     this.messageInput = '';
-//   }
-
-// }

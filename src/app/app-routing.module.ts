@@ -15,6 +15,7 @@ const routes: Routes = [
   {
     path: 'chat',
     component: ChatComponent,
+    canActivate: [AuthGuard]
   },
   {path: 'saladejuegos', loadChildren: () => import('./sala-de-juegos/sala-de-juegos.module').then(m => m.SalaDeJuegosModule) },
   {path: 'error', component: ErrorComponent},
