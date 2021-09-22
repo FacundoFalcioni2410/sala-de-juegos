@@ -19,6 +19,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ChatComponent } from './components/chat/chat.component';
 import { HangmanComponent } from './games/hangman/hangman.component';
 import { MayorMenorComponent } from './games/mayor-menor/mayor-menor.component';
+import { BlackJackComponent } from './games/black-jack/black-jack.component';
+import { PreguntadosComponent } from './games/preguntados/preguntados.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { MayorMenorComponent } from './games/mayor-menor/mayor-menor.component';
     ChatComponent,
     HangmanComponent,
     MayorMenorComponent,
+    BlackJackComponent,
+    PreguntadosComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,7 +44,7 @@ import { MayorMenorComponent } from './games/mayor-menor/mayor-menor.component';
     AngularFireAuthModule,
     MatSnackBarModule,
     ToastrModule.forRoot({
-      timeOut: 3000,
+      timeOut: 1500,
       positionClass: 'toast-bottom-center',
       preventDuplicates: true,
     }),

@@ -1,3 +1,74 @@
+<div class="container-fluid">
+    <div class="panel-body msg_container_base" style='margin-top:1% !important;' #scrollMe [scrollTop]="scrollMe.scrollHeight">
+        <div *ngFor="let message of messages | async">
+            <div class='card text-white float-right' style='width:60%;margin:0 auto 10px 10px;background-color: #FF7F50 !important;' *ngIf="this.auth.isLoggedIn?.email !== message.user">
+                <div class='card-header'>
+                    {{message.user}}
+                </div>
+                <div class="card-body">
+                    {{message.message}}
+                </div>
+                <div class="card-body">
+                    {{message.date}}
+                </div>
+            </div>
+            <div class='card bg-dark text-white float-right' style='width:60%;margin:0 10px 10px auto;background-color:#5260ff !important;' *ngIf="this.auth.isLoggedIn?.email === message.user">
+                <div class='card-header'>
+                    {{message.user}}
+                </div>
+                <div class="card-body">
+                    {{message.message}}
+                </div>
+                <div class="card-body">
+                    {{message.date}}
+                </div>
+            </div>
+        </div>
+    </div>
+        <footer style='border:none;'>
+        <div class="input-group">
+            <input type="text" name="message" class="form-control" id="simple-chat-message" [(ngModel)]="this.message.message" >
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-primary btn-flat" id="message-send" (click)="sendMessage()">Enviar</button>
+            </span>
+        </div>
+        </footer>
+</div>
+    <!-- <ion-card style='width:80%;margin:0 auto 10px 10px;' *ngIf="this.user[0] !== message.user" color='primary'>
+      <div>
+        <ion-card-header>
+          {{message.user}}
+        </ion-card-header>
+        <ion-card-content style='padding-bottom:5px;'>
+          {{message.message}}
+        </ion-card-content>
+        <ion-card-content>
+          {{message.date}}
+        </ion-card-content>
+      </div>
+    </ion-card>
+    <ion-card style='width:80%;margin:0 10px 10px auto;' *ngIf="this.user[0] === message.user" color='tertiary'>
+      <div class="ion-float-right">
+        <ion-card-header>
+          <span></span>
+        </ion-card-header>
+        <ion-card-content >
+          {{message.message}}
+        </ion-card-content>
+        <ion-card-content>
+          {{message.date}}
+        </ion-card-content>
+      </div>
+    </ion-card>
+  </div>
+</ion-content>
+<footer class="ion-no-border">
+    <div style="width: auto; padding: 0 10px">
+      <ion-input type="text" class="ingreso-mensaje" maxlenght=21 style="border: 1px solid; border-radius: 10px; " [(ngModel)]="this.message.message"></ion-input>
+    </div>
+    <button style="width: auto; padding: 0 5px; --background: #FF7F50 !important;" slot="end" (click)="sendMessage()">Enviar</button>
+</footer>
+
 <div class="container">
     <div class="row chat-window col-md-12 justify-content-center" id="chat_window_1" #scrollFrame>
         <div class="col-xs-12 col-md-12" id='mensajes'>
@@ -41,4 +112,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->

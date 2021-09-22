@@ -25,21 +25,31 @@ export class HangmanComponent implements OnInit {
     this.espacios = [];
     this.intentos = 0;
     this.arrayImagen = [
-      '../../assets/ahorca.png',
-      '../../assets/cabeza.png',
-      '../../assets/torso.png',
-      '../../assets/brazoI.png',
-      '../../assets/brazoD.png',
-      '../../assets/piernaI.png',
-      '../../assets/piernaD.png'
+      '../../assets/0.jpg',
+      '../../assets/1.jpg',
+      '../../assets/2.jpg',
+      '../../assets/3.jpg',
+      '../../assets/4.jpg',
+      '../../assets/5.jpg',
+      '../../assets/6.jpg'
     ]
-    this.imagen = '../../assets/ahorca.png'
+    this.imagen = '../../assets/0.jpg'
     this.isRunning = false;
     this.letrasUsadas = Array();
     this.letrasErradas = Array();
   }
 
   ngOnInit(): void {
+  }
+
+  generateButtons() {
+    let buttonsHTML = 'abcdefghijklmnopqrstuvwxyz'.split('').map(letter =>
+      `<button
+          class="btn btn-lg btn-primary m-2"
+          id='` + letter + `' (click)=this.cambiarEspacio('` + letter + `')>
+          ` + letter + `</button>`).join('');
+  
+    document.getElementById('keyboard')!.innerHTML = buttonsHTML;
   }
 
   asignarCantidad(){
@@ -74,8 +84,8 @@ export class HangmanComponent implements OnInit {
   randomWord(){
     this.isRunning = true;
     this.palabraSeleccionada = this.palabras[Math.round(Math.random()*(this.palabras.length - 0))];
-
       this.asignarCantidad();
+      // this.generateButtons();
     }
 
   mostrarToast(mensaje: string, titulo?: string) {
@@ -83,6 +93,7 @@ export class HangmanComponent implements OnInit {
   }
 
   cambiarEspacio(letra: string){
+    console.log(letra);
     if(this.isRunning && this.letrasUsadas.indexOf(letra) === -1)
     {
       let indices: number[] = this.getIndicesOf(letra, this.palabraSeleccionada, false);

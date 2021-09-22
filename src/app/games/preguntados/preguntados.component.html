@@ -1,0 +1,51 @@
+<!-- <div class="row justify-content-center text-center m-0 p-0" *ngIf='!this.isRunning' >
+    <div class="col-12">
+
+    </div>
+</div> -->
+
+<div class="container bg-dark" *ngIf='this.isRunning'>    
+    <div class="row justify-content-center text-center aling-items-center m-5 py-5">
+        <div class="col-12">
+            <div class="card bg-primary">
+                <div class="card-body text-center">
+                    <p>Puntaje: {{this.puntaje}}</p>
+                    <p class="card-text">{{this.preguntaActual.pregunta}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div>
+                <div class="card text-white my-1"  [ngClass]="{'bg-danger': error0, 'bg-success': success0, 'bg-info': info0}">
+                    <button [disabled]='this.seleccionada' style='background-color: transparent !important;border:none;' (click)='respuesta(0)'>
+                        <div class="card-body">{{this.preguntaActual.opciones[0]}}</div>
+                    </button>
+                </div>
+                <div class="card text-white my-1" [ngClass]="{'bg-danger': error1, 'bg-success': success1, 'bg-info': info1}">
+                    <button [disabled]='this.seleccionada' style='background-color: transparent !important;border:none;' (click)='respuesta(1)'>
+                        <div class="card-body">{{this.preguntaActual.opciones[1]}}</div>
+                    </button>
+                </div>
+                <div class="card text-white my-1"  [ngClass]="{'bg-danger': error2, 'bg-success': success2, 'bg-info': info2}">
+                    <button [disabled]='this.seleccionada' style='background-color: transparent !important;border:none;' (click)='respuesta(2)'>
+                        <div class="card-body">{{this.preguntaActual.opciones[2]}}</div>
+                    </button>
+                </div>
+                <div class="card text-white my-1"  [ngClass]="{'bg-danger': error3, 'bg-success': success3, 'bg-info': info3}">
+                    <button [disabled]='this.seleccionada' style='background-color: transparent !important;border:none;' (click)='respuesta(3)'>
+                        <div class="card-body">{{this.preguntaActual.opciones[3]}}</div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <div class="d-flex justify-content-center aling-items-center" *ngIf='!this.isRunning'>
+    <div class="align-self-center">
+        <button class='btn btn-dark btn-block' style='height: 50%;' (click)="this.start()">Comenzar juego</button>
+    </div>
+</div> -->
+
+<div style='position: absolute;inset:0;margin:auto; width:400px;height:400px;z-index:0;' *ngIf='!this.isRunning'>
+    <button class='btn btn-dark btn-block' style='width:100%;height:100%;' (click)="this.start()">Comenzar juego</button>
+</div>
