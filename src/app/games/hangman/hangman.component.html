@@ -1,43 +1,16 @@
-<!-- <div class='bg-dark'>
-    <h1> JUEGO DEL AHORCADO </h1>
-    <div class="row justify-content-center m-0">
-        <div class="col-6 text-center">
-            <div *ngFor='let espacio of this.espacios' class='espacios d-inline'>
-                {{espacio}}
-            </div>
-            <div class="row justify-content-center mt-3">
-                <div class='col-2' *ngFor='let letra of this.letras'>
-                    <input type="button" value={{letra}} id="boton" (click)="this.cambiarEspacio(letra)"/>
-                </div>
-                <button (click)='this.randomWord()' *ngIf='this.palabraSeleccionada === ""'>Generar palabra</button>
-                <button (click)='this.reiniciar()' *ngIf='this.palabraSeleccionada !== ""'>Reiniciar</button>
-            </div>
-            <div class="row">
-                <div class="col-md-3">
-                </div>
-                <div class="col-md-2">
-                    <img src={{this.imagen}} height="300px" width="300px"/>
-      
-                </div>
-                <div class="col-md-5">
-                </div>
-            </div>
+<div class="container-fluid bg-dark" style='height:87vh;'>
+    <div class="text-center">
+        <img id='hangmanPic' src={{this.imagen}} alt="" height='200px' class='ml-2'>
+        <br>
+        <div *ngFor='let espacio of this.espacios' class='espacios d-inline'>
+        <p class="d-inline px-1">{{espacio}}</p>
         </div>
+        <br>
+        <div id="keyboard" *ngFor='let letra of letras' class='d-inline'>
+            <button class="btn btn-lg btn-primary m-2 d-inline" id='letter' (click)=this.cambiarEspacio(letra)>{{letra}}</button>
+        </div>
+        <br>
+        <button class='btn btn-info' style='display:block;margin:auto;' (click)='this.randomWord()' *ngIf='this.palabraSeleccionada === ""'>Generar palabra</button>
+        <button class='btn btn-danger' style='display:block;margin:auto;' (click)='this.reiniciar()' *ngIf='this.palabraSeleccionada !== ""'>Reiniciar</button>
     </div>
-    <br> -->
-
-    <div class="container-fluid bg-dark" style='height:87vh;'>
-        <div class="text-center">
-          <img id='hangmanPic' src={{this.imagen}} alt="" height='200px' class='ml-2'>
-          <br>
-          <div *ngFor='let espacio of this.espacios' class='espacios d-inline'>
-            <p class="d-inline px-1">{{espacio}}</p>
-            </div>
-            <br>
-            <div id="keyboard" *ngFor='let letra of letras' class='d-inline'>
-                <button class="btn btn-lg btn-primary m-2 d-inline" id='letter' (click)=this.cambiarEspacio(letra)>{{letra}}</button>
-            </div>
-            <button class='btn btn-info' (click)='this.randomWord()' *ngIf='this.palabraSeleccionada === ""'>Generar palabra</button>
-            <button class='btn btn-danger' (click)='this.reiniciar()' *ngIf='this.palabraSeleccionada !== ""'>Reiniciar</button>
-        </div>
-    </div> 
+</div> 
