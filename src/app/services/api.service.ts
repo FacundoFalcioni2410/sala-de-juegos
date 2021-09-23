@@ -11,10 +11,10 @@ export class ApiService {
   }
 
   getCards(){
-    return this.http.get('https://deckofcardsapi.com/api/deck/new/draw/?count=52').toPromise();
+    return this.http.get('https://deckofcardsapi.com/api/deck/new/draw/?count=52');
   }
 
   getUser(){
-    return this.http.get('https://api.github.com/users/FacundoFalcioni2410').toPromise();
+    return this.http.get('https://api.github.com/users/FacundoFalcioni2410');
   }
 }

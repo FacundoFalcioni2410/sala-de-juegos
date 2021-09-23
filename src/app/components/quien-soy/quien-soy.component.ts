@@ -11,7 +11,7 @@ export class QuienSoyComponent implements OnInit {
   user: any;
 
   constructor(private api: ApiService) {
-    this.api.getUser().then( (user) =>{
+    this.api.getUser().subscribe((user) =>{
       this.user = user;
     })
   }

@@ -12,7 +12,7 @@ export class BlackJackComponent implements OnInit {
   cardsArray: any[] = [];
 
   constructor(private toaster: ToastrService, private http: ApiService) {
-    this.http.getCards().then( (cards: any) =>{
+    this.http.getCards().subscribe((cards: any) =>{
       console.log(cards);
       this.cardsArray = cards.cards;
     })
@@ -147,18 +147,14 @@ mostrarToast(mensaje: string, tipo: string) {
   var dealerend = this.calcscore(this.dealercards);
   if (playerend > 21) {
     this.mostrarToast('PERDISTE, TE PASASTE DE 21', 'error');
-    
   } else if (dealerend > 21 || playerend > dealerend) {
     this.mostrarToast(`GANASTE $${2 * this.bet}`, 'success');
     this.money += 2 * this.bet;
-    
   } else if (dealerend == playerend) {
     this.mostrarToast(`"Empate $${this.bet}`, 'success');
     this.money += this.bet;
-    
   } else {
     this.mostrarToast(`El crupier gano`, 'error');
-    
   }
   document.getElementById("playermoney")!.innerHTML = "$" + this.money;
 }

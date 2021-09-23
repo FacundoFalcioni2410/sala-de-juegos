@@ -21,7 +21,7 @@ export class MayorMenorComponent implements OnInit {
   isDisabled: boolean = false;
   
   constructor(private toastr: ToastrService, private http: ApiService) {
-    this.http.getCards().then( (cards: any) =>{
+    this.http.getCards().subscribe( (cards: any) =>{
       console.log(cards);
       this.cardsArray = cards.cards;
     })
@@ -36,18 +36,20 @@ export class MayorMenorComponent implements OnInit {
 
     let singleCard: any = this.cardsArray[Math.floor(Math.random() * this.cardsArray.length)];
     let numberAux: any = singleCard.value;
-    // let numberAux = this.cardsArray[Math.floor(Math.random() * this.cardsArray.length)];
 
     switch(numberAux)
     {
-      case 'JACK':
+      case '0':
         this.number = 10;
         break;
-      case 'QUEEN':
+      case 'JACK':
         this.number = 11;
         break;
-      case 'KING':
+      case 'QUEEN':
         this.number = 12;
+        break;
+      case 'KING':
+        this.number = 13;
         break;
       case 'ACE':
         this.number = 1;
@@ -63,16 +65,20 @@ export class MayorMenorComponent implements OnInit {
     let singleCard: any = this.cardsArray[Math.floor(Math.random() * this.cardsArray.length)];
     let numberAux: any = singleCard.value;
 
+
     switch(numberAux)
     {
-      case 'JACK':
+      case 0:
         this.numberNext = 10;
         break;
-      case 'QUEEN':
+      case 'JACK':
         this.numberNext = 11;
         break;
-      case 'KING':
+      case 'QUEEN':
         this.numberNext = 12;
+        break;
+      case 'KING':
+        this.numberNext = 13;
         break;
       case 'ACE':
         this.numberNext = 1;
@@ -104,7 +110,7 @@ export class MayorMenorComponent implements OnInit {
         this.number = this.numberNext;
       }
       else
-      {
+      {        
         this.score = 0;
         this.isDisabled = false;
         this.mostrarToast('HAS PERDIDO', 'FIN DEL JUEGO');
