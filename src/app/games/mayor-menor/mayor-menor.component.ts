@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { ApiService } from './../../services/api.service';
 
 @Component({
   selector: 'app-mayor-menor',
@@ -9,7 +10,8 @@ import { ToastrService } from 'ngx-toastr';
 export class MayorMenorComponent implements OnInit {
 
   cards = ['♥', '♣', '♦', '♠'];
-  numbers = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']; 
+  numbers = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
+  cardsArray = [];
   card: string = '';
   nextCard: string = '';
   number: number = 0;
@@ -18,7 +20,12 @@ export class MayorMenorComponent implements OnInit {
   isRunning: boolean = false;
   isDisabled: boolean = false;
   
-  constructor(private toastr: ToastrService) { }
+  constructor(private toastr: ToastrService, private http: ApiService) {
+    this.http.getCards().then( (cards: any) =>{
+      console.log(cards);
+      this.cardsArray = cards.cards;
+    })
+  }
 
   ngOnInit(): void {
   }
@@ -27,54 +34,54 @@ export class MayorMenorComponent implements OnInit {
     this.isRunning = true;
     this.isDisabled = true;
 
-    let singleCard = this.cards[Math.floor(Math.random() * this.cards.length)];
-    let numberAux = this.numbers[Math.floor(Math.random() * this.numbers.length)];
+    let singleCard: any = this.cardsArray[Math.floor(Math.random() * this.cardsArray.length)];
+    let numberAux: any = singleCard.value;
+    // let numberAux = this.cardsArray[Math.floor(Math.random() * this.cardsArray.length)];
 
     switch(numberAux)
     {
-      case 'J':
+      case 'JACK':
         this.number = 10;
         break;
-      case 'Q':
+      case 'QUEEN':
         this.number = 11;
         break;
-      case 'K':
+      case 'KING':
         this.number = 12;
         break;
-      case 'A':
+      case 'ACE':
         this.number = 1;
         break;
       default:
         this.number = parseInt(numberAux);
         break;
     }
-
-    this.card = `${this.number} ${singleCard}`;
+    this.card = singleCard.image;
   }
 
   proximaCarta(){
-    let singleCard = this.cards[Math.floor(Math.random() * this.cards.length)];
-    let numberN = this.numbers[Math.floor(Math.random() * this.numbers.length)];
+    let singleCard: any = this.cardsArray[Math.floor(Math.random() * this.cardsArray.length)];
+    let numberAux: any = singleCard.value;
 
-    switch(numberN)
+    switch(numberAux)
     {
-      case 'J':
+      case 'JACK':
         this.numberNext = 10;
         break;
-      case 'Q':
+      case 'QUEEN':
         this.numberNext = 11;
         break;
-      case 'K':
+      case 'KING':
         this.numberNext = 12;
         break;
-      case 'A':
+      case 'ACE':
         this.numberNext = 1;
         break;
       default:
-        this.numberNext = parseInt(numberN);
+        this.numberNext = parseInt(numberAux);
         break;
     }
-    return `${this.numberNext} ${singleCard}`;
+    return singleCard.image;
   }
 
   

@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { environment } from '../environments/environment';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -42,6 +43,7 @@ import { PreguntadosComponent } from './games/preguntados/preguntados.component'
     FormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
+    HttpClientModule,
     MatSnackBarModule,
     ToastrModule.forRoot({
       timeOut: 1500,

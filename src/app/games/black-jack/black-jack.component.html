@@ -1,10 +1,22 @@
 <div class='bg-dark color'>
     <button class="debutton" (click)="deal(1)">Apostar $1</button>		<button class="debutton" (click)="deal(5)">Apostar $5</button>		<button class="debutton" (click)="deal(10)">Apostar $10</button>		<button class="debutton" (click)="deal(20)">Apostar $20</button><br>		<div id="playermoney">$100</div>
-		Cartas del crupier:<div id="dealercards"></div>
-		Puntaje del crupier:<span id="dealerscore"></span><br>
+		<div class='col-12'>
+			Cartas del crupier:
+		</div>
+		<div id="dealercards" *ngFor='let card of dealercards' class='d-inline'>
+			<img src={{card.image}} class='d-inline px-2' alt="" height="150px" width="150px">
+		</div>
 		<br>
-		Tus cartas:<div id="playercards"></div>
-		Tu puntaje:<span id="playerscore"></span><br>
+		<div class="col-12">
+			Puntaje del crupier:<span id="dealerscore"></span><br>
+		</div>
+		<div class='col-12'>
+			Tus cartas:
+		</div>
+		<div id="playercards" *ngFor='let card of playercards' class='d-inline'>
+				<img src={{card.image}} class='d-inline px-2' alt="" height="150px" width="150px">
+		</div>
+		<div class="col-12">Tu puntaje:<span id="playerscore"></span></div>
 		<br>
 		<button id="htbutton" (click)="hit()">Pedir</button>
 		<button id="stbutton" (click)="stand()">Plantarse</button>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-quien-soy',
@@ -7,7 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QuienSoyComponent implements OnInit {
 
-  constructor() { }
+  user: any;
+
+  constructor(private api: ApiService) {
+    this.api.getUser().then( (user) =>{
+      this.user = user;
+    })
+  }
 
   ngOnInit(): void {
   }

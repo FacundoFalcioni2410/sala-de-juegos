@@ -1,8 +1,19 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-12 col-md-4 offset-md-4">
+            <div class="card bg-dark">
+                <h5 class="card-header text-white">
+                    {{this.user.name}}
+                </h5>
+                <div class="card-body">
+                    <img src={{this.user.avatar_url}} alt="" style="height: 100%; width: 100%; border-radius: 15px; margin-bottom: 15px;">
+                    <p class="card-text text-white text-justify">
+                        {{this.user.bio}}
+                    </p>
+                </div>
+            </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-12 col-md-4 offset-md-4">
             <div class="card bg-dark">
                 <h5 class="card-header text-white">
                     Blackjack
@@ -14,8 +25,6 @@
                     </p>
                 </div>
             </div>
-        </div>
-        <div class="col-md-4">
         </div>
     </div>
 </div>

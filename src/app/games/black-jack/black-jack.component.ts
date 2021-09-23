@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-black-jack',
@@ -8,7 +9,14 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class BlackJackComponent implements OnInit {
 
-  constructor(private toaster: ToastrService) { }
+  cardsArray: any[] = [];
+
+  constructor(private toaster: ToastrService, private http: ApiService) {
+    this.http.getCards().then( (cards: any) =>{
+      console.log(cards);
+      this.cardsArray = cards.cards;
+    })
+  }
 
   ngOnInit(): void {
   }
@@ -66,7 +74,7 @@ export class BlackJackComponent implements OnInit {
   //makes sure all cards haven't been played yet.
   if (this.deck.length < 52) {
     while (keepgoing) {
-      cardpull = Math.floor((Math.random() * 52) + 1);
+      cardpull = this.cardsArray[Math.floor(Math.random() * this.cardsArray.length)];
       keepgoing = false;
       //checks to see if that card was pulled from the deck previously
       for (let i = 0; i < this.deck.length; i++) {
@@ -76,28 +84,14 @@ export class BlackJackComponent implements OnInit {
       }
     }
     this.deck.push(cardpull);
-    //checks the suit of the card
-    if (cardpull <= 13) {
-      suit = "@"
-    } else if (cardpull <= 26) {
-      suit = "*"
-      cardpull -= 13;
-    } else if (cardpull <= 39) {
-      suit = "%"
-      cardpull -= 26;
-    } else if (cardpull <= 52) {
-      suit = "!"
-      cardpull -= 39;
-    }
-    //checks who the game is pulling cards for and pushes the card value and suit into the arrays
+
     if (playernum == 0) {
       this.dealercards.push(cardpull);
-      this.dealersuits.push(suit);
-      //player can't know the value of the dealer's cards, replace with a -- placeholder
+      
       if (this.dealercards.length > 1) {
         var passcards: any = this.dealercards.slice(1, 2);
         var passsuits: any = this.dealersuits.slice(1, 2);
-        document.getElementById("dealercards")!.innerHTML = this.drawcards(passcards, this.dealersuits);
+        // document.getElementById("dealercards")!.innerHTML = this.drawcards(passcards, this.dealersuits);
       }
 
     }
@@ -105,7 +99,7 @@ export class BlackJackComponent implements OnInit {
       this.playercards.push(cardpull);
       this.playersuits.push(suit);
       document.getElementById("playerscore")!.innerHTML = this.calcscore(this.playercards).toString();
-      document.getElementById("playercards")!.innerHTML = this.drawcards(this.playercards, this.playersuits);
+      // document.getElementById("playercards")!.innerHTML = this.drawcards(this.playercards, this.playersuits);
     }
     return true;
   }
@@ -153,14 +147,18 @@ mostrarToast(mensaje: string, tipo: string) {
   var dealerend = this.calcscore(this.dealercards);
   if (playerend > 21) {
     this.mostrarToast('PERDISTE, TE PASASTE DE 21', 'error');
+    
   } else if (dealerend > 21 || playerend > dealerend) {
     this.mostrarToast(`GANASTE $${2 * this.bet}`, 'success');
     this.money += 2 * this.bet;
+    
   } else if (dealerend == playerend) {
     this.mostrarToast(`"Empate $${this.bet}`, 'success');
     this.money += this.bet;
+    
   } else {
     this.mostrarToast(`El crupier gano`, 'error');
+    
   }
   document.getElementById("playermoney")!.innerHTML = "$" + this.money;
 }
@@ -187,23 +185,43 @@ mostrarToast(mensaje: string, tipo: string) {
     this.pullcard(0);
   }
   document.getElementById("dealerscore")!.innerHTML = this.calcscore(this.dealercards).toString();
-  document.getElementById("dealercards")!.innerHTML = this.drawcards(this.dealercards, this.dealersuits);
+  // document.getElementById("dealercards")!.innerHTML = this.drawcards(this.dealercards, this.dealersuits);
 }
 
 //takes in an array of card values and calculates the score
  calcscore(cards: any) {
   var aces = 0;
   var endscore = 0;
+  let number = 0;
 
   //count cards and check for ace
   for (let i = 0; i < cards.length; i++) {
-    if (cards[i] == 1 && aces == 0) {
+    switch(cards[i].value)
+    {
+      case 'JACK':
+        number = 10;
+        break;
+      case 'QUEEN':
+        number = 11;
+        break;
+      case 'KING':
+        number = 12;
+        break;
+      case 'ACE':
+        number = 1;
+        break;
+      default:
+        number = parseInt(cards[i].value);
+        break;
+    }
+
+    if (number == 1 && aces == 0) {
       aces++;
     } else { //if it's not an ace
-      if (cards[i] >= 10) {
+      if (number >= 10) {
         endscore += 10;
       } else {
-        endscore += cards[i];
+        endscore += number;
       }
     }
   }
@@ -219,41 +237,20 @@ mostrarToast(mensaje: string, tipo: string) {
   return endscore;
 }
 
-//ascii drawing, takes the number of cards in the array and draws 5 lines
- drawcards(cards: any, suits: any) {
-  var lines = ["", "", "", "", ""];
-  let type = ['♥', '♣', '♦', '♠'];
-
-  //2nd line (contains value)
-  for (let i = 0; i < cards.length; i++) {
-    lines[1] += ' ';
-    lines[1] += this.cardvalue(cards[i]);
-    lines[1] +=  type[Math.floor(Math.random() * type.length)];
-    // lines[1] += ' - ';
-  }
-
-  lines[1] += "</br>";
-
-
-
-
-  return lines[0] + lines[1]  +  lines[4];
-}
-
 //fixes for ace jack queen and king cards from their 1 11 12 13 values, used for drawing ascii
- cardvalue(cardnum: number) {
-  if (cardnum == 1) {
-    return "A";
+  cardvalue(cardnum: string) {
+    if (cardnum === 'ACE') {
+      return "A";
+    }
+    if (cardnum == 'JACK') {
+      return "J";
+    }
+    if (cardnum === 'QUEEN') {
+      return "Q";
+    }
+    if (cardnum === 'KING') {
+      return "K";
+    } else return parseInt(cardnum);
   }
-  if (cardnum == 11) {
-    return "J";
-  }
-  if (cardnum == 12) {
-    return "Q";
-  }
-  if (cardnum == 13) {
-    return "K";
-  } else return cardnum;
-}
 
 }
