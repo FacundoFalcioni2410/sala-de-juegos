@@ -33,6 +33,8 @@ export class BlackJackComponent implements OnInit {
 //Deal button clicked
  deal(playerbet: any) {
   //make sure player has enough money to play
+   document.getElementById("dealerscore")!.innerHTML = '';
+   document.getElementById("playerscore")!.innerHTML = '';
   if(playerbet > this.money){
     this.mostrarToast(`No tienes suficiente dinero para apostar, actualmente tienes ${this.money}`,'error');
     return true;

@@ -111,10 +111,10 @@ export class MayorMenorComponent implements OnInit {
       }
       else
       {        
-        this.score = 0;
         this.isDisabled = false;
         this.mostrarToast('HAS PERDIDO', 'FIN DEL JUEGO');
         setTimeout(() => {
+          this.score = 0;
           this.card = '';
           this.isRunning = false;
         },1500)
@@ -129,10 +129,10 @@ export class MayorMenorComponent implements OnInit {
       }
       else
       {
-        this.score = 0;
         this.isDisabled = false;
         this.mostrarToast('HAS PERDIDO', 'FIN DEL JUEGO');
         setTimeout(() => {
+          this.score = 0;
           this.card = '';
           this.isRunning = false;
         },1500)
